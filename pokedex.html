@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+</head>
+<body ng-app="pokedex">
+
+<div class="container" ng-controller="controllerpokedex">
+    <h1>Pokésir</h1>
+    <input ng-model="id" type="text" name="">
+    <h3>{{id}}</h3>
+    <!-- Search -->
+    <div >
+
+        <input ng-model="filtreChoix" type="text" name="">
+        <select ng-model="choixpoke">
+            <option ng-repeat="pokemon in data.listepoke | filter:filtreChoix" value="{{pokemon.id}}">{{pokemon.name}}</option>
+        </select>
+        <button ng-click="validerchoix()">Go!</button>
+
+    </div>
+
+    <!-- Pokémon information -->
+    <div ng-controller="controllerInfoPoke">
+        <h1>{{pokemoninfo.id}}</h1>
+        <h1>{{pokemoninfo.name}}</h1>
+        <image src="{{pokemoninfo.sprites.front_default}}"></image>
+    </div>
+
+</div>
+
+<!-- Dependencies -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-resource.min.js"></script>
+
+<!-- Pokedex app -->
+<script src="js/pokedex.js"></script>
+
+
+</body>
+</html>
