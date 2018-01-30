@@ -11,21 +11,34 @@ pokeApp.factory('ServicePokeOne', ['$resource',function($resource) {
   return $resource("https://pokeapi.co/api/v2/pokemon/:id/");
 }]);
 
-pokeApp.controller('controllerpokedex', ['$scope','$log', 'ServicePokeOne', function($scope, $log, ServicePokeOne) {
+pokeApp.factory('ServiceInfoPoke', function() {
+    return {value: 1};
+});
+
+pokeApp.controller('controllerpokedex', ['$scope','$log', 'ServicePokeOne','ServiceInfoPoke' , function($scope, $log, ServicePokeOne, ServiceInfoPoke) {
   
   $scope.data = {
   	listepoke:[
-  		{id: '1', name : 'bulbisar'},
+  		{id: '1', name: 'bulbisar'},
   		{id: '2', name: 'salamèche'},
   		{id: '3', name: 'pikachu'},
   		{id: '4', name: 'dracaufeu'}
   ]};
 
   $scope.validerchoix = function(){
-  	$log.log(ServicePokeOne.get({id:$scope.choixpoke}));
-
+      $scope.pokemon = ServicePokeOne.get({id:$scope.choixpoke}, function(){
+          ServiceInfoPoke.value = $scope.pokemon;
+        }
+      );
   };
 
+}]);
+
+pokeApp.controller('controllerInfoPoke', ['$scope','$log','ServiceInfoPoke', function($scope, $log, ServiceInfoPoke) {
+    $scope.ServiceInfoPoke = ServiceInfoPoke;
+    $scope.$watch('ServiceInfoPoke.value', function(newVal){
+        $scope.pokemoninfo = newVal;
+    });
 
 }]);
 
