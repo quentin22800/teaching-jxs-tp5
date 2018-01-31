@@ -17,9 +17,11 @@ pokeApp.factory('ServiceInfoPoke', function() {
 
 pokeApp.directive('pokedex', function(){
     return{
-        template: '<div ng-include="pokedex.html"></div>'
+        template: '<div ng-include="\'pokedex.html\'"></div>'
     }
-})
+});
+
+
 pokeApp.controller('controllerpokedex', ['$scope','$log', 'ServicePokeOne','ServiceInfoPoke' , function($scope, $log, ServicePokeOne, ServiceInfoPoke) {
   
   $scope.data = {
