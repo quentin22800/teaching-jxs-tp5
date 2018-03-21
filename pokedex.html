@@ -1,14 +1,15 @@
 
 <div class="container" ng-controller="controllerpokedex">
     <h1>Pokésir</h1>
-    <input ng-model="id" type="text" name="">
+    <!--<input ng-model="id" type="text" name="">
     <h3>{{id}}</h3>
+    Ne sert plus-->
     <!-- Search -->
     <div >
 
         <input ng-model="filtreChoix" type="text" name="">
         <select ng-model="choixpoke">
-            <option ng-repeat="pokemon in data.listepoke | filter:filtreChoix" value="{{pokemon.id}}">{{pokemon.name}}</option>
+            <option ng-repeat="pokemon in listepoke | filter:filtreChoix" value="{{pokemon.id}}">{{pokemon.name}}</option>
         </select>
         <button ng-click="validerchoix()">Go!</button>
 
@@ -19,6 +20,11 @@
         <h1>{{pokemoninfo.id}}</h1>
         <h1>{{pokemoninfo.name}}</h1>
         <image src="{{pokemoninfo.sprites.front_default}}"></image>
+        <ul>
+        <li ng-repeat=" poke in pokemoninfo.moves">
+            {{ poke.move.name }}
+        </li>
+        </ul>
     </div>
 
 </div>
